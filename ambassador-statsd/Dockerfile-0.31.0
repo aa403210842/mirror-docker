@@ -1,0 +1,1 @@
+FROM quay.io/datawire/statsd:0.31.0
