@@ -1,6 +1,7 @@
 > quay.io/coreos/etcd
 
 # Supported tags
+- `v3.0.17`
 - `v3.1.10`
 - `v3.1.12`
 - `v3.1.14`
