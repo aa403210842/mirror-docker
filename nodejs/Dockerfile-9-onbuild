@@ -1,0 +1,26 @@
+# 指定我们的基础镜像是node
+FROM node:9-alpine
+# # apk 更新国内源
+RUN echo -e "http://mirrors.aliyun.com/alpine/v3.6/main\nhttp://mirrors.aliyun.com/alpine/v3.6/community" > /etc/apk/repositories
+# 设置工作目录 /usr/src/app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# 配置环境变量
+# 1
+ONBUILD ARG NODE_ENV=production
+ONBUILD ENV NODE_ENV $NODE_ENV
+
+ONBUILD ARG PORT=3000
+ONBUILD ENV PORT $PORT
+# 2
+# 安装项目依赖包
+ONBUILD COPY package.json /usr/src/app/
+ONBUILD RUN yarn install --production && yarn cache clean --force
+# 拷贝当前目录到 /usr/src/app
+ONBUILD COPY . /usr/src/app
+# 容器对外暴露的端口号
+ONBUILD EXPOSE $PORT
+
+# 容器启动时执行的命令，类似npm run start
+CMD ["node", "--version"]
