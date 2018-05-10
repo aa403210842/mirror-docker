@@ -1,6 +1,10 @@
 > k8s.gcr.io/kube-scheduler-amd64
+> gcr.io/google_containers/kube-scheduler-amd64
 
 # Supported tags
+- `v1.7.16`
+- `v1.8.12`
+- `v1.9.7`
 - `v1.10.0`
 - `v1.10.1`
 - `v1.10.2`
