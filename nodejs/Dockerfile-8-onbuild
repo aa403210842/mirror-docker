@@ -13,10 +13,12 @@ ONBUILD ENV NODE_ENV $NODE_ENV
 
 ONBUILD ARG PORT=3000
 ONBUILD ENV PORT $PORT
+
+ONBUILD ARG NPMRC=""
 # 2
 # 安装项目依赖包
 ONBUILD COPY package.json /usr/src/app/
-ONBUILD RUN yarn install --production && yarn cache clean --force
+ONBUILD RUN echo -e $NPMRC > .npmrc && yarn install --production && yarn cache clean --force
 # 拷贝当前目录到 /usr/src/app
 ONBUILD COPY . /usr/src/app
 # 容器对外暴露的端口号
