@@ -1,5 +1,5 @@
 # 指定我们的基础镜像是node
-FROM node:9-alpine
+FROM node:8-alpine
 # # apk 更新国内源
 RUN echo -e "http://mirrors.aliyun.com/alpine/v3.6/main\nhttp://mirrors.aliyun.com/alpine/v3.6/community" > /etc/apk/repositories
 # 设置工作目录 /usr/src/app
@@ -18,7 +18,7 @@ ONBUILD ARG NPMRC=""
 # 2
 # 安装项目依赖包
 ONBUILD COPY package.json /usr/src/app/
-ONBUILD RUN echo -e $NPMRC > .npmrc && yarn install --production && yarn cache clean --force
+ONBUILD RUN echo -e $NPMRC > .npmrc && yarn install --production && yarn cache clean --force && rm -f .npmrc
 # 拷贝当前目录到 /usr/src/app
 ONBUILD COPY . /usr/src/app
 # 容器对外暴露的端口号
