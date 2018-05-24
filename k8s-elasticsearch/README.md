@@ -3,3 +3,4 @@
 
 # Supported tags
 - `v5.6.4`
+- `v6.2.4`
