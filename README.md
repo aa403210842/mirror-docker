@@ -22,8 +22,8 @@
 - k8s.gcr.io/fluentd-elasticsearch
 
 - gcr.io/google-containers/echoserver
-- gcr.io/google_containers/defaultbackend
-- gcr.io/google_containers/metrics-server-amd64
+- gcr.io/google-containers/defaultbackend
+- gcr.io/google-containers/metrics-server-amd64
 - gcr.io/google-containers/rescheduler
 
 ## gcr.io

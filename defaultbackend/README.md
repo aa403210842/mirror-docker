@@ -1,4 +1,4 @@
-> gcr.io/google_containers/defaultbackend
+> gcr.io/google-containers/defaultbackend
 
 # Supported tags
 - `1.4`

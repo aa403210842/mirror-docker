@@ -1,4 +1,4 @@
-> gcr.io/google_containers/metrics-server-amd64
+> gcr.io/google-containers/metrics-server-amd64
 
 # Supported tags
 - `v0.1.0`
