@@ -1,4 +1,4 @@
-> quay.io/jetstack/cert-manager-controller
+> quay.io/jetstack/cert-manager-acmesolver
 
 # Supported tags
 - `v0.2.4`
