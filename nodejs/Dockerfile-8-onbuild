@@ -5,7 +5,7 @@ RUN echo -e "http://mirrors.aliyun.com/alpine/v3.6/main\nhttp://mirrors.aliyun.c
 
 # 更新中国时区
 ARG TIME_ZONE='Asia/Shanghai'
-RUN apk update && apk --no-cache add tzdata && cp -R /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && echo $TIME_ZONE > /etc/timezone && apk del tzdata && rm -rf /var/cache/apk/*
+RUN apk update && apk --no-cache add tzdata && cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && echo $TIME_ZONE > /etc/timezone && apk del tzdata && rm -rf /var/cache/apk/*
 
 # 设置工作目录 /usr/src/app
 RUN mkdir -p /usr/src/app

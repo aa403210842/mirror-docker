@@ -1,14 +1,11 @@
-FROM python:2.7.15-alpine3.6
+FROM registry.cn-hangzhou.aliyuncs.com/camsgear/python:2.7.15-alpine3.6
 
-MAINTAINER edwin.cen@camsgear.com
+# MAINTAINER edwin.cen@camsgear.com
 
 # 使用国内镜像
-RUN echo -e "http://mirrors.aliyun.com/alpine/v3.6/main\n\
-http://mirrors.aliyun.com/alpine/v3.6/community\n\
-@testing http://nl.alpinelinux.org/alpine/edge/testing" > /etc/apk/repositories
+RUN echo -e "\n@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-RUN apk update && apk upgrade
-
+RUN apk update
 RUN apk add --update --no-cache \
   # --virtual .build-deps \
       build-base \
@@ -44,12 +41,7 @@ RUN apk add --update --no-cache \
 
       linux-headers
 
-RUN mkdir ~/.pip
-RUN touch ~/.pip/pip.conf
-RUN echo "[global]" >> ~/.pip/pip.conf
-RUN echo "trusted-host = mirrors.aliyun.com" >> ~/.pip/pip.conf
-RUN echo "index-url = http://mirrors.aliyun.com/pypi/simple" >> ~/.pip/pip.conf
-RUN pip install --upgrade pip
+#安装python依赖
 RUN pip install numpy
 
 ENV CC /usr/bin/clang
@@ -65,12 +57,7 @@ RUN mkdir /opt && cd /opt && \
   -D WITH_IPP=NO -D WITH_OPENEXR=NO .. && \
   make VERBOSE=1 && \
   make && \
-  make install
+  make install && \
+  rm -rf /opt/*
 
-RUN apk add tzdata && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" >  /etc/timezone && \
-    apk del tzdata
-
-RUN rm -rf /var/cache/apk/*
-RUN rm -rf /opt/*
+RUN  rm -rf /var/cache/apk/*

@@ -3,21 +3,19 @@ FROM python:2.7.15-alpine3.6
 MAINTAINER edwin.cen@camsgear.com
 
 # 使用国内镜像
-RUN echo -e "http://mirrors.aliyun.com/alpine/v3.6/main\n\
-http://mirrors.aliyun.com/alpine/v3.6/community" > /etc/apk/repositories
-
-RUN apk update && apk upgrade
+RUN echo -e "http://mirrors.aliyun.com/alpine/v3.6/main\nhttp://mirrors.aliyun.com/alpine/v3.6/community" > /etc/apk/repositories
 
 #修正时区
-RUN apk add tzdata && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" >  /etc/timezone && \
-    apk del tzdata
+ARG TIME_ZONE='Asia/Shanghai'
+RUN apk update && \
+    apk --no-cache add tzdata && \
+    cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && \
+    echo $TIME_ZONE > /etc/timezone && \
+    apk del tzdata && \
+    rm -rf /var/cache/apk/*
 
 #修改国内源
-RUN mkdir ~/.pip
-RUN touch ~/.pip/pip.conf
-RUN echo "[global]\n\
-          trusted-host = mirrors.aliyun.com\n\
-          index-url = http://mirrors.aliyun.com/pypi/simple" >> ~/.pip/pip.conf
-RUN pip install --upgrade pip
+RUN mkdir ~/.pip && \
+    touch ~/.pip/pip.conf && \
+    echo -e "[global]\nindex-url = https://mirrors.aliyun.com/pypi/simple/\n[install]\ntrusted-host = mirrors.aliyun.com" >> ~/.pip/pip.conf && \
+    pip install --upgrade pip
