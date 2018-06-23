@@ -12,6 +12,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # 配置环境变量
+ENV SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/
 # 1
 ONBUILD ARG NODE_ENV=production
 ONBUILD ENV NODE_ENV $NODE_ENV
