@@ -1,1 +1,1 @@
-FROM quay.io/jetstack/cert-manager-acmesolver:v0.3.2
+FROM quay.io/jetstack/cert-manager-acmesolver:v0.4.0

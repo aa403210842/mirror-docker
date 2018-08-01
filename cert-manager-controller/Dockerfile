@@ -1,1 +1,1 @@
-FROM quay.io/jetstack/cert-manager-controller:v0.3.2
+FROM quay.io/jetstack/cert-manager-controller:v0.4.0
