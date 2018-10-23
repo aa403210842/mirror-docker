@@ -1,7 +1,7 @@
 # 指定我们的基础镜像是node
-FROM node:8-alpine
+FROM node:8.12-alpine
 # # apk 更新国内源
-RUN echo -e "http://mirrors.aliyun.com/alpine/v3.6/main\nhttp://mirrors.aliyun.com/alpine/v3.6/community" > /etc/apk/repositories
+RUN echo -e "https://mirrors.aliyun.com/alpine/v3.8/main\nhttps://mirrors.aliyun.com/alpine/v3.8/community" > /etc/apk/repositories
 
 # 更新中国时区
 ARG TIME_ZONE='Asia/Shanghai'
@@ -12,19 +12,22 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # 配置环境变量
-ENV SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/
 # 1
+ONBUILD ENV SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/
+
 ONBUILD ARG NODE_ENV=production
 ONBUILD ENV NODE_ENV $NODE_ENV
 
 ONBUILD ARG PORT=3000
 ONBUILD ENV PORT $PORT
 
+ONBUILD ARG YARN_OR_NPM=yarn
+
 # 2
 # 安装项目依赖包
 ONBUILD COPY package.json /usr/src/app/
 ONBUILD COPY .npmr[c] /usr/src/app/
-ONBUILD RUN yarn install --production && yarn cache clean --force && rm -f .npmrc
+ONBUILD RUN $YARN_OR_NPM install --production && $YARN_OR_NPM cache clean --force && rm -f .npmrc
 # 拷贝当前目录到 /usr/src/app
 ONBUILD COPY . /usr/src/app
 # 容器对外暴露的端口号
