@@ -5,11 +5,16 @@ RUN echo -e "http://mirrors.aliyun.com/alpine/v3.8/main\nhttp://mirrors.aliyun.c
 
 # 更新中国时区
 ARG TIME_ZONE='Asia/Shanghai'
-RUN apk update && apk --no-cache add tzdata && cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && echo $TIME_ZONE > /etc/timezone && apk del tzdata && rm -rf /var/cache/apk/*
+RUN apk update && apk --no-cache add tzdata && cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && echo $TIME_ZONE > /etc/timezone && apk del tzdata && apk add git && rm -rf /var/cache/apk/*
+
+# 设置中文环境
+RUN npm install --unsafe-perm -g full-icu && npm cache clean --force
+ENV NODE_ICU_DATA="/usr/local/lib/node_modules/full-icu"
 
 # 设置工作目录 /usr/src/app
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
+
 
 # 配置环境变量
 # 1
