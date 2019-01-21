@@ -1,5 +1,5 @@
 # 指定我们的基础镜像是node
-FROM node:8.15-alpine
+FROM node:11.7-alpine
 # # apk 更新国内源
 ARG ALPINE_VERSION='3.8'
 RUN echo -e "http://mirrors.aliyun.com/alpine/v${ALPINE_VERSION}/main\nhttp://mirrors.aliyun.com/alpine/v${ALPINE_VERSION}/community" > /etc/apk/repositories
