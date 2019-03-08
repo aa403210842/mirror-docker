@@ -1,8 +1,7 @@
 # 指定我们的基础镜像是node
 FROM node:8.15-alpine
-# # apk 更新国内源
-ARG ALPINE_VERSION='3.8'
-RUN echo -e "http://mirrors.aliyun.com/alpine/v${ALPINE_VERSION}/main\nhttp://mirrors.aliyun.com/alpine/v${ALPINE_VERSION}/community" > /etc/apk/repositories
+# apk 更新国内源
+RUN sed -i -e "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/" -e "s/http:/https:/" /etc/apk/repositories
 
 # 更新中国时区
 ARG TIME_ZONE='Asia/Shanghai'
@@ -33,7 +32,6 @@ ONBUILD COPY . /usr/src/app
 
 # 删除 .npmrc
 ONBUILD RUN if [ -f .npmrc ]; then rm -f .npmrc; fi
-
 
 # 容器启动时执行的命令，类似npm run start
 CMD ["node", "--version"]

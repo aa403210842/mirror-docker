@@ -3,3 +3,5 @@
 # ignore
 # ambassador/
 # statsd/
+
+nodejs/icu4c-63_1-src.tgz

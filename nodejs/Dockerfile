@@ -1,12 +1,17 @@
 # 指定我们的基础镜像是node
 FROM node:8.15-alpine
-# # apk 更新国内源
-ARG ALPINE_VERSION='3.8'
-RUN echo -e "http://mirrors.aliyun.com/alpine/v${ALPINE_VERSION}/main\nhttp://mirrors.aliyun.com/alpine/v${ALPINE_VERSION}/community" > /etc/apk/repositories
+
+# apk 更新国内源
+RUN sed -i -e "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/" -e "s/http:/https:/" /etc/apk/repositories
 
 # 更新中国时区
 ARG TIME_ZONE='Asia/Shanghai'
-RUN apk update && apk --no-cache add tzdata && cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && echo $TIME_ZONE > /etc/timezone && apk del tzdata && rm -rf /var/cache/apk/*
+RUN apk update && \
+    apk --no-cache add tzdata && \
+    cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && \
+    echo $TIME_ZONE > /etc/timezone && \
+    apk del tzdata && \
+    rm -rf /var/cache/apk/*
 
 # 设置工作目录 /usr/src/app
 RUN mkdir -p /usr/src/app
