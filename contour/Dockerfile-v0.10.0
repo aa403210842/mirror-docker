@@ -1,0 +1,1 @@
+FROM gcr.io/heptio-images/contour:v0.10.0
