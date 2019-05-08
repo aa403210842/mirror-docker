@@ -7,11 +7,14 @@ RUN sed -i -e "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/" -e "s/http:/https:/
 # 更新中国时区
 ARG TIME_ZONE='Asia/Shanghai'
 RUN apk update && \
-    apk --no-cache add tzdata && \
+    apk add --no-cache tzdata && \
     cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && \
     echo $TIME_ZONE > /etc/timezone && \
     apk del tzdata && \
     rm -rf /var/cache/apk/*
+
+# 更新 npm国内taobao源
+RUN npm config set registry https://registry.npm.taobao.org
 
 # 设置中文环境
 RUN npm install --unsafe-perm -g full-icu && npm cache clean --force

@@ -1,6 +1,11 @@
+# lts
+```bash
+docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:lts -f Dockerfile .
+```
+
 # onbuild
 ```bash
-docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:onbuild -f Dockerfile .
+docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:onbuild -f Dockerfile-onbuild .
 ```
 
 # git-onbuild
@@ -16,6 +21,11 @@ docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:icu-onbuild -f
 # canvas-onbuild
 ```bash
 docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:canvas-onbuild -f Dockerfile-canvas-onbuild .
+```
+
+# libxmljs-onbuild
+```bash
+docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:libxmljs-onbuild -f Dockerfile-libxmljs-onbuild .
 ```
 
 # 测试

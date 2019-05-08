@@ -1,45 +1,21 @@
 # 指定我们的基础镜像是node
 FROM node:10.15-alpine
 
-# apk 更新国内源
+# 更新 apk国内源
 RUN sed -i -e "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/" -e "s/http:/https:/" /etc/apk/repositories
 
-# 更新中国时区
+# 更新 中国时区
+# LANG=zh_CN.UTF-8
 ARG TIME_ZONE='Asia/Shanghai'
 RUN apk update && \
-    apk --no-cache add tzdata && \
+    apk add --no-cache tzdata && \
     cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && \
     echo $TIME_ZONE > /etc/timezone && \
     apk del tzdata && \
     rm -rf /var/cache/apk/*
 
-# 设置工作目录 /usr/src/app
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-# 配置环境变量
-ONBUILD ENV SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/
-
-ONBUILD ARG NODE_ENV=production
-ONBUILD ENV NODE_ENV $NODE_ENV
-
-ONBUILD ARG PORT=3000
-ONBUILD ENV PORT $PORT
-
-ONBUILD ARG YARN_OR_NPM=yarn
-
-# 容器对外暴露的端口号
-ONBUILD EXPOSE $PORT
-
-# 安装项目依赖包
-ONBUILD COPY package.json .npmr[c] /usr/src/app/
-ONBUILD RUN $YARN_OR_NPM install --production && $YARN_OR_NPM cache clean --force
-
-# 拷贝当前目录到 /usr/src/app
-ONBUILD COPY . /usr/src/app
-
-# 删除 .npmrc
-ONBUILD RUN if [ -f .npmrc ]; then rm -f .npmrc; fi
+# 更新 npm国内taobao源
+RUN npm config set registry https://registry.npm.taobao.org
 
 # 容器启动时执行的命令，类似npm run start
 CMD ["node", "--version"]

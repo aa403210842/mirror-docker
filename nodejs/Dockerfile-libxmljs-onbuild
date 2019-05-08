@@ -20,8 +20,8 @@ RUN npm config set registry https://registry.npm.taobao.org
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# 添加 git
-RUN apk add --no-cache --virtual .base-deps git
+# 添加 编译环境.build-deps
+RUN apk add --no-cache --virtual .build-deps python make g++ gcc
 
 # 配置环境变量
 ONBUILD ENV SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/
@@ -32,20 +32,23 @@ ONBUILD ENV NODE_ENV $NODE_ENV
 ONBUILD ARG PORT=3000
 ONBUILD ENV PORT $PORT
 
-ONBUILD ARG YARN_OR_NPM=yarn
+ONBUILD ARG YARN_OR_NPM=npm
 
 # 容器对外暴露的端口号
 ONBUILD EXPOSE $PORT
 
 # 安装项目依赖包
 ONBUILD COPY package.json .npmr[c] /usr/src/app/
-ONBUILD RUN $YARN_OR_NPM install --production && $YARN_OR_NPM cache clean --force
+ONBUILD RUN $YARN_OR_NPM install --production --build-from-source && $YARN_OR_NPM cache clean --force
 
 # 拷贝当前目录到 /usr/src/app
 ONBUILD COPY . /usr/src/app
 
 # 删除 .npmrc
 ONBUILD RUN if [ -f .npmrc ]; then rm -f .npmrc; fi
+
+# 删除 编译环境.build-deps
+ONBUILD RUN apk del .build-deps
 
 # 容器启动时执行的命令，类似npm run start
 CMD ["node", "--version"]
