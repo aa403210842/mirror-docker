@@ -15,7 +15,8 @@ RUN apk update && \
     rm -rf /var/cache/apk/*
 
 # 更新 npm国内taobao源
-RUN npm config set registry https://registry.npm.taobao.org
+RUN npm config set registry https://registry.npm.taobao.org && \
+    npm config set disturl https://npm.taobao.org/mirrors/node/
 
 # 容器启动时执行的命令，类似npm run start
 CMD ["node", "--version"]
