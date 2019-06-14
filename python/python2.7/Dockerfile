@@ -1,14 +1,15 @@
-FROM python:2.7.15-alpine3.6
+FROM python:2.7.16-alpine
 
 MAINTAINER edwin.cen@camsgear.com
 
-# 使用国内镜像
-RUN echo -e "http://mirrors.aliyun.com/alpine/v3.6/main\nhttp://mirrors.aliyun.com/alpine/v3.6/community" > /etc/apk/repositories
+# 更新 apk国内源
+RUN sed -i -e "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/" -e "s/http:/https:/" /etc/apk/repositories
 
-#修正时区
+# 更新 中国时区
+# LANG=zh_CN.UTF-8
 ARG TIME_ZONE='Asia/Shanghai'
 RUN apk update && \
-    apk --no-cache add tzdata && \
+    apk add --no-cache tzdata && \
     cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && \
     echo $TIME_ZONE > /etc/timezone && \
     apk del tzdata && \
