@@ -22,4 +22,6 @@ RUN mkdir ~/.pip && \
     pip install --upgrade pip
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK=on
-RUN pip install poetry
+
+RUN pip install poetry && \
+    poetry config settings.virtualenvs.create false
