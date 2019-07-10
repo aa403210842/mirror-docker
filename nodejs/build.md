@@ -1,34 +1,29 @@
 # lts
 ```bash
-docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:lts -f Dockerfile .
+docker build -t registry.cn-hangzhou.aliyuncs.com/icamdora/nodejs:lts -f Dockerfile .
 ```
 
 # onbuild
 ```bash
-docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:onbuild -f Dockerfile-onbuild .
+docker build -t registry.cn-hangzhou.aliyuncs.com/icamdora/nodejs:onbuild -f Dockerfile-onbuild .
 ```
 
 # git-onbuild
 ```bash
-docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:git-onbuild -f Dockerfile-git-onbuild .
+docker build -t registry.cn-hangzhou.aliyuncs.com/icamdora/nodejs:git-onbuild -f Dockerfile-git-onbuild .
 ```
 
 # icu-onbuild
 ```bash
-docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:icu-onbuild -f Dockerfile-icu-onbuild .
-```
-
-# canvas-onbuild
-```bash
-docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:canvas-onbuild -f Dockerfile-canvas-onbuild .
+docker build -t registry.cn-hangzhou.aliyuncs.com/icamdora/nodejs:icu-onbuild -f Dockerfile-icu-onbuild .
 ```
 
 # libxmljs-onbuild
 ```bash
-docker build -t registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:libxmljs-onbuild -f Dockerfile-libxmljs-onbuild .
+docker build -t registry.cn-hangzhou.aliyuncs.com/icamdora/nodejs:libxmljs-onbuild -f Dockerfile-libxmljs-onbuild .
 ```
 
 # 测试
 ```
-docker run -d --name test -p 3000:3000 registry.cn-hangzhou.aliyuncs.com/camsgear/nodejs:onbuild
+docker run -d --name test -p 3000:3000 registry.cn-hangzhou.aliyuncs.comi/cadorar/nodejs:onbuild
 ```
