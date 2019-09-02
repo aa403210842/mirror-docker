@@ -1,5 +1,5 @@
 # 指定我们的基础镜像是node
-FROM node:10.16.0-alpine
+FROM node:10.16.3-alpine
 
 # 更新 apk国内源
 RUN sed -i -e "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/" -e "s/http:/https:/" /etc/apk/repositories
@@ -16,7 +16,9 @@ RUN apk update && \
 
 # 更新 npm国内taobao源
 RUN npm config set registry https://registry.npm.taobao.org && \
-    npm config set disturl https://npm.taobao.org/mirrors/node/
+    npm config set disturl https://npm.taobao.org/mirrors/node/ && \
+    npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/ && \
+    npm config set fsevents_binary_host_mirror https://npm.taobao.org/mirrors/fsevents/
 
 # 容器启动时执行的命令，类似npm run start
 CMD ["node", "--version"]

@@ -10,8 +10,6 @@ RUN npm install --unsafe-perm -g full-icu && npm cache clean --force
 ENV NODE_ICU_DATA="/usr/local/lib/node_modules/full-icu"
 
 # 配置环境变量
-ONBUILD ENV SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/
-
 ONBUILD ARG NODE_ENV=production
 ONBUILD ENV NODE_ENV $NODE_ENV
 
