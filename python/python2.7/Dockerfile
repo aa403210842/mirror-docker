@@ -1,4 +1,4 @@
-FROM python:2.7.16-alpine
+FROM python:2.7.17-alpine
 
 MAINTAINER edwin.cen@camsgear.com
 

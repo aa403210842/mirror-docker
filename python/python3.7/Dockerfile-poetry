@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/icamdora/python:2.7
+FROM registry.cn-hangzhou.aliyuncs.com/icamdora/python:3.7
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK=on
 
