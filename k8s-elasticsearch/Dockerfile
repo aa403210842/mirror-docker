@@ -1,1 +1,1 @@
-FROM k8s.gcr.io/elasticsearch:v6.3.0
+FROM gcr.io/google_containers/elasticsearch:v6.3.0
