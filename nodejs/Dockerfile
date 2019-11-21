@@ -1,5 +1,5 @@
 # 指定我们的基础镜像是node
-FROM node:10.16.3-alpine
+FROM node:12.13.0-alpine
 
 # 更新 apk国内源
 RUN sed -i -e "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/" -e "s/http:/https:/" /etc/apk/repositories
